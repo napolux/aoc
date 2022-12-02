@@ -2,7 +2,7 @@
 
 My [Advent of Code](https://adventofcode.com/) solutions public repo made in Node.js and TypeScript.
 
-### Use ar your own risk
+### Use at your own risk
 
 The "day-" folder structure should export two methods: `firstPart()` and `secondPart()`. Why this? Pretty obvious if you know how AoC works.
 
