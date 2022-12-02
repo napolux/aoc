@@ -1,6 +1,6 @@
 # aoc
 
-My [Advent of Code](https://adventofcode.com/) solutions public repo made in Node.js and TypeScript.
+My [Advent of Code](https://adventofcode.com/) solutions public repo made in Node.js and TypeScript. Tested on node version 18.12.1
 
 ### Use at your own risk
 
