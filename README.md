@@ -32,7 +32,7 @@ $ yarn solve 2022 1
 
 ### My rules
 
-- I don't strive for "elegant" code or exotic language usages and I'll use `lodash` (and other libraries) if I need to.
+- I'm not going for "elegant" code or exotic language usages and I'll use `lodash` (and other libraries) if I need to. Don't reinvent the wheel!
 - Everything in a single file, excluding input
 
 ### No shame if it works reasonably. 😉
