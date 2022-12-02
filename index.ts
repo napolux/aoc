@@ -1,8 +1,8 @@
 import chalk from 'chalk';
 const [year, day] = process.argv.slice(2);
 
-const title = (s: unknown) => console.log(chalk.bold.redBright(s));
-const solution = (s: unknown) => console.log(chalk.green(s));
+const title = (s: any) => console.log(chalk.bold.redBright(s));
+const solution = (s: any) => console.log(chalk.green(s));
 
 if (!year || !day) {
   console.error('Missing arguments! Run this with `yarn solve <year> <day>`');
