@@ -1,0 +1,67 @@
+import { find } from 'lodash-es';
+import { input } from './resources/input.js';
+
+// crunching input
+const games = input.split("\n");
+
+type Play = {
+  left: string,
+  right: string,
+  score: number,
+}
+
+type Rules = {
+  firstPart: Play[]
+  secondPart: Play[]
+}
+
+const rpsRules: Rules = {
+  firstPart: [
+    { left: 'A', right: 'X', score: 4 }, // rock/rock draw 1+3
+    { left: 'A', right: 'Y', score: 8 }, // rock/paper win 2+6
+    { left: 'A', right: 'Z', score: 3 }, // rock/scissors lost 3+0
+    { left: 'B', right: 'X', score: 1 }, // paper/rock lost 1+0
+    { left: 'B', right: 'Y', score: 5 }, // paper/paper draw 2+3
+    { left: 'B', right: 'Z', score: 9 }, // paper/scissors win 3+6
+    { left: 'C', right: 'X', score: 7 }, // scissors/rock win 1+6
+    { left: 'C', right: 'Y', score: 2 }, // scissors/paper lost 2+0
+    { left: 'C', right: 'Z', score: 6 }, // scissors/scissors draw 3+3
+  ],
+  secondPart: [
+    // X YOU MUST LOSE
+    // Y YOU MUST DRAW
+    // Z YOU MUST WIN
+    { left: 'A', right: 'X', score: 3 }, // rock/rock draw 1+3
+    { left: 'A', right: 'Y', score: 4 }, // rock/paper win 2+6
+    { left: 'A', right: 'Z', score: 8 }, // rock/scissors lost 3+0
+    { left: 'B', right: 'X', score: 1 }, // paper/rock lost 1+0
+    { left: 'B', right: 'Y', score: 5 }, // paper/paper draw 2+3
+    { left: 'B', right: 'Z', score: 9 }, // paper/scissors win 3+6
+    { left: 'C', right: 'X', score: 2 }, // scissors/rock win 1+6
+    { left: 'C', right: 'Y', score: 6 }, // scissors/paper lost 2+0
+    { left: 'C', right: 'Z', score: 7 }, // scissors/scissors draw 3+3
+  ],
+}
+
+const results = (left: string, right: string, plays: Play[]): number => {
+  const play = find(plays, el => el.left === left && el.right === right);
+  return (play) ? play.score : 0;
+};
+
+const play = (games: string[], rules: Play[]): number => {
+  let score = 0;
+  games.forEach(game => {
+    const [left, right] = game.split(' ');
+    score = score + results(left, right, rules);
+  });
+  return score;
+}
+
+
+export const firstPart = () => {
+  return play(games, rpsRules.firstPart)
+}
+
+export const secondPart = () => {
+  return play(games, rpsRules.secondPart)
+}
