@@ -8,6 +8,7 @@ The "day-" folder structure should export two methods: `firstPart()` and `second
 
 ```
 export const firstPart = (): any => {
+
 }
 
 export const secondPart = (): any => {
