@@ -1,0 +1,26 @@
+{
+  "name": "napolux-aoc",
+  "version": "1.0.0",
+  "description": "My Advent of Code repo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/napolux/aoc.git"
+  },
+  "keywords": [
+    "aoc",
+    "advent",
+    "of",
+    "code",
+    "typescript"
+  ],
+  "author": "napolux@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/napolux/aoc/issues"
+  },
+  "homepage": "https://github.com/napolux/aoc#readme"
+}
