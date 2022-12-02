@@ -6,10 +6,10 @@ const elves = input.split("\n\n");
 const getElvesCalories = () => {
   const calories: number[] = [];
   elves.forEach((elf) => {
+    // counting calories for single elf
     const elfCalories = elf.split("\n");
-    var nums = elfCalories.map(function (s) {
-      return parseInt(s);
-    });
+    // we want numbers :-)
+    const nums = elfCalories.map(s => +s);
     const value = nums.reduce((a, b) => a + b, 0);
     calories.push(value);
   })
