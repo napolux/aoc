@@ -28,7 +28,7 @@ For example, to see the solution for day 1 of 2022 you should launch
 $ yarn solve 2022 1
 ```
 
-![screenshot](https://i.imgur.com/wpngl9L.png)
+![screenshot](https://i.imgur.com/5O25uXH.png)
 
 ### My rules
 
