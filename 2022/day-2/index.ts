@@ -2,7 +2,7 @@ import { find } from 'lodash-es';
 import { input } from './resources/input.js';
 
 // crunching input
-const games = input.split("\n");
+const games = input.split("\n").map(game => game.split(' '));
 
 type Play = {
   left: string,
@@ -15,7 +15,7 @@ type Rules = {
   secondPart: Play[]
 }
 
-const rpsRules: Rules = {
+const rockPaperScissorsRules: Rules = {
   firstPart: [
     { left: 'A', right: 'X', score: 4 }, // rock/rock draw 1+3
     { left: 'A', right: 'Y', score: 8 }, // rock/paper win 2+6
@@ -48,20 +48,10 @@ const results = (left: string, right: string, plays: Play[]): number => {
   return (play) ? play.score : 0;
 };
 
-const play = (games: string[], rules: Play[]): number => {
-  let score = 0;
-  games.forEach(game => {
-    const [left, right] = game.split(' ');
-    score = score + results(left, right, rules);
-  });
-  return score;
-}
+const play = (games: string[][], rules: Play[]): number => games.map(
+  game => results(game[0], game[1], rules)
+).reduce((a, b) => a + b, 0);
 
+export const firstPart = () => play(games, rockPaperScissorsRules.firstPart);
 
-export const firstPart = () => {
-  return play(games, rpsRules.firstPart)
-}
-
-export const secondPart = () => {
-  return play(games, rpsRules.secondPart)
-}
+export const secondPart = () => play(games, rockPaperScissorsRules.secondPart);
