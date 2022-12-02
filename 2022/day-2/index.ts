@@ -31,15 +31,15 @@ const rpsRules: Rules = {
     // X YOU MUST LOSE
     // Y YOU MUST DRAW
     // Z YOU MUST WIN
-    { left: 'A', right: 'X', score: 3 }, // rock/rock draw 1+3
-    { left: 'A', right: 'Y', score: 4 }, // rock/paper win 2+6
-    { left: 'A', right: 'Z', score: 8 }, // rock/scissors lost 3+0
-    { left: 'B', right: 'X', score: 1 }, // paper/rock lost 1+0
-    { left: 'B', right: 'Y', score: 5 }, // paper/paper draw 2+3
-    { left: 'B', right: 'Z', score: 9 }, // paper/scissors win 3+6
-    { left: 'C', right: 'X', score: 2 }, // scissors/rock win 1+6
-    { left: 'C', right: 'Y', score: 6 }, // scissors/paper lost 2+0
-    { left: 'C', right: 'Z', score: 7 }, // scissors/scissors draw 3+3
+    { left: 'A', right: 'X', score: 3 }, // rock/lose 
+    { left: 'A', right: 'Y', score: 4 }, // rock/draw 
+    { left: 'A', right: 'Z', score: 8 }, // rock/win 
+    { left: 'B', right: 'X', score: 1 }, // paper/lose 
+    { left: 'B', right: 'Y', score: 5 }, // paper/draw
+    { left: 'B', right: 'Z', score: 9 }, // paper/win
+    { left: 'C', right: 'X', score: 2 }, // scissors/lose 
+    { left: 'C', right: 'Y', score: 6 }, // scissors/draw 
+    { left: 'C', right: 'Z', score: 7 }, // scissors/win 
   ],
 }
 
