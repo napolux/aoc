@@ -43,15 +43,12 @@ const rockPaperScissorsRules: Rules = {
   ],
 }
 
-const results = (left: string, right: string, plays: Play[]): number => {
-  const play = find(plays, el => el.left === left && el.right === right);
-  return (play) ? play.score : 0;
-};
+const results = (left: string, right: string, plays: Play[]): number =>
+  find(plays, el => el.left === left && el.right === right).score || 0;
 
 const play = (games: string[][], rules: Play[]): number => games.map(
   game => results(game[0], game[1], rules)
 ).reduce((a, b) => a + b, 0);
 
-export const firstPart = () => play(games, rockPaperScissorsRules.firstPart);
-
-export const secondPart = () => play(games, rockPaperScissorsRules.secondPart);
+export const firstPart = (): number => play(games, rockPaperScissorsRules.firstPart);
+export const secondPart = (): number => play(games, rockPaperScissorsRules.secondPart);
