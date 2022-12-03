@@ -1,4 +1,4 @@
-export const input: string = `2936
+export const input = `2936
 2154
 1578
 4820

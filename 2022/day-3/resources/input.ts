@@ -1,4 +1,4 @@
-export const input: string = `ZTmtZvZLTFNLMQMNRvZncdcHwcScJvcdHnVfwV
+export const input = `ZTmtZvZLTFNLMQMNRvZncdcHwcScJvcdHnVfwV
 zqjqrzqjCqrjtqWhqChqrznhcfdfVnVSVgcffcgJcSgd
 rtDGpzjjqjlrGsWqBWFRsbTPFQMTbRNRFmbs
 FFlnlnVlmQqcBVhBRrSrGSwVdRJbztSt

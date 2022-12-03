@@ -16,15 +16,15 @@ const firstPartScores = new Map<string, number>([
 // Y YOU MUST DRAW
 // Z YOU MUST WIN
 const secondPartScores = new Map<string, number>([
-  ['A X', 3], // opponent plays rock / you "must" lose 
-  ['A Y', 4], // opponent plays rock / you "must" draw 
-  ['A Z', 8], // opponent plays rock / you "must" win 
-  ['B X', 1], // opponent plays paper / you "must" lose 
+  ['A X', 3], // opponent plays rock / you "must" lose
+  ['A Y', 4], // opponent plays rock / you "must" draw
+  ['A Z', 8], // opponent plays rock / you "must" win
+  ['B X', 1], // opponent plays paper / you "must" lose
   ['B Y', 5], // opponent plays paper / you "must" draw
   ['B Z', 9], // opponent plays paper / you "must" win
-  ['C X', 2], // opponent plays scissors / you "must" lose 
-  ['C Y', 6], // opponent plays scissors / you "must" draw 
-  ['C Z', 7], // opponent plays scissors / you "must" win 
+  ['C X', 2], // opponent plays scissors / you "must" lose
+  ['C Y', 6], // opponent plays scissors / you "must" draw
+  ['C Z', 7], // opponent plays scissors / you "must" win
 ]);
 
 const play = (games: string[], scores: Map<string, number>): number => games.map(

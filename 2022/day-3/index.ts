@@ -2,7 +2,7 @@ import { chunk } from 'lodash-es';
 import { input } from './resources/input.js';
 
 // list of possible items in a rucksack
-const ITEMS_MAP: string = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const ITEMS_MAP = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 const getDuplicateItemsCount = (rucksacks: string[]): number => {
   const duplicate = rucksacks.map(rucksack => {
@@ -33,14 +33,14 @@ const findBadgesCount = (rucksacks: string[]): number => {
   groups.forEach(group => {
     // for each group, we search for the only item available in each elf rucksack
     const badge: string = ITEMS_MAP.split('').filter(item =>
-      group[0].indexOf(item) !== -1 &&
-      group[1].indexOf(item) !== -1 &&
-      group[2].indexOf(item) !== -1
+      group[0].includes(item) &&
+      group[1].includes(item) &&
+      group[2].includes(item)
     ).shift();
     badges.push(ITEMS_MAP.indexOf(badge) + 1)
   });
 
-  return badges.reduce((a, b) => a + b, 0);
+  return badges.reduce((a: number, b: number) => a + b, 0);
 }
 
 // crunching input

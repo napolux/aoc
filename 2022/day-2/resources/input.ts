@@ -1,4 +1,4 @@
-export const input: string = `C Z
+export const input = `C Z
 B Y
 C X
 B Z
