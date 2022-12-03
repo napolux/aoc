@@ -1,27 +1,29 @@
 import { chunk } from 'lodash-es';
 import { input } from './resources/input.js';
 
-const charMap: string = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+// list of possible items in a rucksack
+const ITEMS_MAP: string = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-const getRucksacksDuplicatedItemsCount = (rucksacks: string[][]): number => {
-  const splitRucksacks = rucksacks.map(r => [
-    r.slice(0, r.length / 2),
-    r.slice(r.length / 2),
-  ]);
+const getDuplicateItemsCount = (rucksacks: string[]): number => {
+  const duplicate = rucksacks.map(rucksack => {
+    // the rucksack has 2 compartments
+    const firstComp = rucksack.slice(0, rucksack.length / 2);
+    const secondComp = rucksack.slice(rucksack.length / 2);
 
-  const result = splitRucksacks.map(split => {
-    const first = split[0];
-    const second = split[1];
-    const size = first.length;
-    for (let i = 0; i < size; i++) {
-      for (let j = 0; j < size; j++) {
-        if (first[i] === second[j]) {
-          return first[i];
+    // we get compartment size
+    const compSize = firstComp.length;
+
+    // we search for the very first item that is in both compartments and then we quit searching
+    for (let i = 0; i < compSize; i++) {
+      for (let j = 0; j < compSize; j++) {
+        if (firstComp[i] === secondComp[j]) {
+          return firstComp[i];
         }
       }
     }
   });
-  return result.map(char => charMap.indexOf(char) + 1).reduce((a, b) => a + b, 0);
+
+  return duplicate.map(item => ITEMS_MAP.indexOf(item) + 1).reduce((a, b) => a + b, 0);
 };
 
 const findBadgesCount = (rucksacks: string[]): number => {
@@ -29,20 +31,20 @@ const findBadgesCount = (rucksacks: string[]): number => {
   const badges = [];
 
   groups.forEach(group => {
-    // for each group, we search for the only char available in each elf rucksack
-    const badge: string = charMap.split('').filter(char =>
-      group[0].indexOf(char) !== -1 &&
-      group[1].indexOf(char) !== -1 &&
-      group[2].indexOf(char) !== -1
+    // for each group, we search for the only item available in each elf rucksack
+    const badge: string = ITEMS_MAP.split('').filter(item =>
+      group[0].indexOf(item) !== -1 &&
+      group[1].indexOf(item) !== -1 &&
+      group[2].indexOf(item) !== -1
     ).shift();
-    badges.push(charMap.indexOf(badge) + 1)
+    badges.push(ITEMS_MAP.indexOf(badge) + 1)
   });
 
   return badges.reduce((a, b) => a + b, 0);
 }
 
 // crunching input
-const rucksacks = input.split("\n");
+const rucksacks = input.split('\n');
 
-export const firstPart = () => getRucksacksDuplicatedItemsCount(rucksacks.map(rucksack => rucksack.split('')));
+export const firstPart = (): number => getDuplicateItemsCount(rucksacks);
 export const secondPart = (): number => findBadgesCount(rucksacks);

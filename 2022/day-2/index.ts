@@ -32,7 +32,7 @@ const play = (games: string[], scores: Map<string, number>): number => games.map
 ).reduce((a, b) => a + b, 0);
 
 // crunching input
-const games = input.split("\n");
+const games = input.split('\n');
 
 export const firstPart = (): number => play(games, firstPartScores);
 export const secondPart = (): number => play(games, secondPartScores);
