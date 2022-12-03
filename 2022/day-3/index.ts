@@ -1,3 +1,4 @@
+import { chunk } from 'lodash-es';
 import { input } from './resources/input.js';
 
 const charMap: string = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -23,22 +24,19 @@ const getRucksacksDuplicatedItemsCount = (rucksacks: string[][]): number => {
   return result.map(char => charMap.indexOf(char) + 1).reduce((a, b) => a + b, 0);
 };
 
-const findBadges = (rucksacks: string[]): number => {
+const findBadgesCount = (rucksacks: string[]): number => {
+  const groups = chunk(rucksacks, 3);
   const badges = [];
-  const size = rucksacks.length - 3;
-
-  for (let i = 0; i <= size; i = i + 3) {
-    const firstElf = rucksacks[i];
-    const secondElf = rucksacks[i + 1];
-    const thirdElf = rucksacks[i + 2];
-
+  groups.forEach(group => {
+    // for each group, we search for the only char available in each elf rucksack
     const badge: string = charMap.split('').filter(char =>
-      firstElf.indexOf(char) !== -1 &&
-      secondElf.indexOf(char) !== -1 &&
-      thirdElf.indexOf(char) !== -1
-    )[0];
+      group[0].indexOf(char) !== -1 &&
+      group[1].indexOf(char) !== -1 &&
+      group[2].indexOf(char) !== -1
+    ).shift();
     badges.push(charMap.indexOf(badge) + 1)
-  }
+  });
+
   return badges.reduce((a, b) => a + b, 0);
 }
 
@@ -46,4 +44,4 @@ const findBadges = (rucksacks: string[]): number => {
 const rucksacks = input.split("\n");
 
 export const firstPart = () => getRucksacksDuplicatedItemsCount(rucksacks.map(rucksack => rucksack.split('')));
-export const secondPart = (): number => findBadges(rucksacks);
+export const secondPart = (): number => findBadgesCount(rucksacks);

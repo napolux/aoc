@@ -4,14 +4,14 @@ My [Advent of Code](https://adventofcode.com/) solutions public repo made in Nod
 
 ### Use at your own risk
 
-The "day-" folder structure should export two methods: `firstPart()` and `secondPart()`. Why this? Pretty obvious if you know how AoC works.
+The `day-` folder structure should export two methods: `firstPart()` and `secondPart()` that should return a number. Why this? Pretty obvious if you know how AoC works.
 
 ```
-export const firstPart = (): any => {
+export const firstPart = (): number => {
 
 }
 
-export const secondPart = (): any => {
+export const secondPart = (): number => {
 
 }
 ```
