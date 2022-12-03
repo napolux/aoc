@@ -5,8 +5,8 @@ const charMap: string = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 const getRucksacksDuplicatedItemsCount = (rucksacks: string[][]): number => {
   const splitRucksacks = rucksacks.map(r => [
-    r.slice(0, r.length / 2).sort(),
-    r.slice((r.length / 2), r.length).sort(),
+    r.slice(0, r.length / 2),
+    r.slice(r.length / 2),
   ]);
 
   const result = splitRucksacks.map(split => {
@@ -27,6 +27,7 @@ const getRucksacksDuplicatedItemsCount = (rucksacks: string[][]): number => {
 const findBadgesCount = (rucksacks: string[]): number => {
   const groups = chunk(rucksacks, 3);
   const badges = [];
+
   groups.forEach(group => {
     // for each group, we search for the only char available in each elf rucksack
     const badge: string = charMap.split('').filter(char =>
