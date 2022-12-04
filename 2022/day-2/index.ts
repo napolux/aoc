@@ -1,4 +1,4 @@
-import { input } from './resources/input.js';
+import { getInput } from '../../utils/index.js';
 
 const firstPartScores = new Map<string, number>([
   ['A X', 4], // rock/rock draw 1+3 
@@ -32,7 +32,7 @@ const play = (games: string[], scores: Map<string, number>): number => games.map
 ).reduce((a, b) => a + b, 0);
 
 // crunching input
-const games = input.split('\n');
+const games = getInput(2022, 2).split('\n');
 
 export const firstPart = (): number => play(games, firstPartScores);
 export const secondPart = (): number => play(games, secondPartScores);

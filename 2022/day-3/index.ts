@@ -1,5 +1,5 @@
 import { chunk } from 'lodash-es';
-import { input } from './resources/input.js';
+import { getInput } from '../../utils/index.js';
 
 // list of possible items in a rucksack
 const ITEMS_MAP = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -44,7 +44,7 @@ const findBadgesCount = (rucksacks: string[]): number => {
 }
 
 // crunching input
-const rucksacks = input.split('\n');
+const rucksacks = getInput(2022, 3).split('\n');
 
 export const firstPart = (): number => getDuplicateItemsCount(rucksacks);
 export const secondPart = (): number => findBadgesCount(rucksacks);

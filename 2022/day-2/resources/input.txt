@@ -1,4 +1,4 @@
-export const input = `C Z
+C Z
 B Y
 C X
 B Z
@@ -2497,4 +2497,4 @@ C Y
 B Y
 C Y
 B Y
-A Y`;
+A Y
