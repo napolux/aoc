@@ -26,16 +26,13 @@ const getDuplicateItemsCount = (rucksacks: string[]): number => {
   return duplicate.map(item => ITEMS_MAP.indexOf(item) + 1).reduce((a, b) => a + b, 0);
 };
 
-const findBadgesCount = (rucksacks: string[]): number => {
-  const groups = chunk(rucksacks, 3);
+const findBadgesCount = (groups: string[][]): number => {
   const badges = [];
 
+  // for each group, we search for the only item available in each elf rucksack
   groups.forEach(group => {
-    // for each group, we search for the only item available in each elf rucksack
     const badge: string = ITEMS_MAP.split('').filter(item =>
-      group[0].includes(item) &&
-      group[1].includes(item) &&
-      group[2].includes(item)
+      group[0].includes(item) && group[1].includes(item) && group[2].includes(item)
     ).shift();
     badges.push(ITEMS_MAP.indexOf(badge) + 1)
   });
@@ -47,4 +44,4 @@ const findBadgesCount = (rucksacks: string[]): number => {
 const rucksacks = getInput(2022, 3).split('\n');
 
 export const firstPart = (): number => getDuplicateItemsCount(rucksacks);
-export const secondPart = (): number => findBadgesCount(rucksacks);
+export const secondPart = (): number => findBadgesCount(chunk(rucksacks, 3));

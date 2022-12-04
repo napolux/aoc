@@ -27,6 +27,7 @@ const secondPartScores = new Map<string, number>([
   ['C Z', 7], // opponent plays scissors / you "must" win
 ]);
 
+// play games and sum scores
 const play = (games: string[], scores: Map<string, number>): number => games.map(
   game => scores.get(game) || 0
 ).reduce((a, b) => a + b, 0);
