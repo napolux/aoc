@@ -24,11 +24,7 @@ const moveCrates = (dock: string[][], procedure: number[][], isUsingCrateMover90
 const procedure = getInput(2022, 5)
   .split('\n')
   .map(step =>
-    step
-      .replace('move ', '')
-      .replace(' from ', ',')
-      .replace(' to ', ',')
-      .split(',')
+    step.match(/\d+/g)
       // this is to get correct array indexes
       .map((detail, index) =>
         (index > 0) ? parseInt(detail) - 1 : parseInt(detail))
