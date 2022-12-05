@@ -4,14 +4,14 @@ My [Advent of Code](https://adventofcode.com/) solutions public repo made in Nod
 
 ### Use at your own risk
 
-The `day-` folder structure should export two methods: `firstPart()` and `secondPart()` that should return a number. Why this? Pretty obvious if you know how AoC works.
+The `day-` folder structure should export two methods: `firstPart()` and `secondPart()` that should return the result of your computation. Why this? Pretty obvious if you know how AoC works.
 
 ```
-export const firstPart = (): number => {
+export const firstPart = (): <your return type> => {
 
 }
 
-export const secondPart = (): number => {
+export const secondPart = (): <your return type> => {
 
 }
 ```
@@ -38,14 +38,16 @@ $ yarn solve 2022 1
 ### No shame if it works reasonably. 😉
 
 <!--- advent_readme_stars table --->
+
 ## 2022 Results
 
-| Day | Part 1 | Part 2 |
-| :---: | :---: | :---: |
-| [Day 1](https://adventofcode.com/2022/day/1) | ⭐ | ⭐ |
-| [Day 2](https://adventofcode.com/2022/day/2) | ⭐ | ⭐ |
-| [Day 3](https://adventofcode.com/2022/day/3) | ⭐ | ⭐ |
-| [Day 4](https://adventofcode.com/2022/day/4) | ⭐ | ⭐ |
+|                     Day                      | Part 1 | Part 2 |
+| :------------------------------------------: | :----: | :----: |
+| [Day 1](https://adventofcode.com/2022/day/1) |   ⭐   |   ⭐   |
+| [Day 2](https://adventofcode.com/2022/day/2) |   ⭐   |   ⭐   |
+| [Day 3](https://adventofcode.com/2022/day/3) |   ⭐   |   ⭐   |
+| [Day 4](https://adventofcode.com/2022/day/4) |   ⭐   |   ⭐   |
+
 <!--- advent_readme_stars table --->
 
 ## LEGAL STUFF
