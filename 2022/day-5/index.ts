@@ -1,3 +1,4 @@
+import { cloneDeep } from "lodash-es";
 import { getInput } from "../../utils/index.js";
 import { start } from "./resources/input.js";
 
@@ -7,11 +8,13 @@ enum MOVE {
   TO,
 }
 
-const moveCrates = (dock: string[][], procedure: number[][]) => {
+const moveCrates = (dock: string[][], procedure: number[][], isUsingCrateMover9001 = false) => {
   procedure.forEach(step => {
-    // get slice from dock
-    const toBeMoved = dock[step[MOVE.FROM]].splice(-step[MOVE.COUNT]).reverse();
-    // put in place
+    // get containers to be moved from stack
+    const toBeMoved = (isUsingCrateMover9001)
+      ? dock[step[MOVE.FROM]].splice(-step[MOVE.COUNT])
+      : dock[step[MOVE.FROM]].splice(-step[MOVE.COUNT]).reverse();
+    // put in place in the new stack
     dock[step[MOVE.TO]] = [...dock[step[MOVE.TO]], ...toBeMoved];
   });
   return dock;
@@ -21,7 +24,8 @@ const moveCrates = (dock: string[][], procedure: number[][]) => {
 const procedure = getInput(2022, 5)
   .split('\n')
   .map(step =>
-    step.replace('move ', '')
+    step
+      .replace('move ', '')
       .replace(' from ', ',')
       .replace(' to ', ',')
       .split(',')
@@ -30,8 +34,5 @@ const procedure = getInput(2022, 5)
         (index > 0) ? parseInt(detail) - 1 : parseInt(detail))
   );
 
-export const firstPart = (): string => {
-  return moveCrates(start, procedure).map(stack => stack.pop()).join('');
-}
-
-export const secondPart = (): string => ''
+export const firstPart = (): string => moveCrates(cloneDeep(start), procedure).map(stack => stack.pop()).join('');
+export const secondPart = (): string => moveCrates(cloneDeep(start), procedure, true).map(stack => stack.pop()).join('');
