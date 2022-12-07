@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { getInput } from '../../utils/index.js';
 import { find } from 'lodash-es'
 enum COMMANDS {
@@ -55,10 +54,10 @@ const getFilesystem = (input: string[]): Node[] => {
             currentFolder = fs[0];
           } else if (cmd[2] === DIR_UP) {
             if (currentFolder.name === DIR_ROOT) return;
-            currentFolder = find(fs, { id: currentFolder.parentId })!;
+            currentFolder = find(fs, { id: currentFolder.parentId });
           } else {
             // a new directory
-            currentFolder = find(fs, { parentId: currentFolder.id, name: cmd[2] })!
+            currentFolder = find(fs, { parentId: currentFolder.id, name: cmd[2] })
           }
         }
         break;
