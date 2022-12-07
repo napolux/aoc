@@ -1,20 +1,10 @@
 import { getInput } from '../../utils/index.js';
 import { find } from 'lodash-es'
+
 enum COMMANDS {
   CD = 'cd',
   LS = 'ls',
 }
-
-// some stuff to make it more readable
-const PROMPT = '$';
-const DIR = 'dir';
-const DIR_ROOT = '/';
-const DIR_UP = '..';
-
-const MAX_FOLDER_SIZE = 100000;
-const TOTAL_DISK_SPACE = 70000000;
-const REQUIRED_DISK_SPACE = 30000000;
-const ROOT_FOLDER_ID = 1;
 
 enum TypeEnum {
   FILE,
@@ -28,6 +18,17 @@ type Node = {
   size?: number,
   type: TypeEnum,
 }
+
+// some stuff to make it more readable
+const DIR = 'dir';
+const DIR_ROOT = '/';
+const DIR_UP = '..';
+const PROMPT = '$';
+const ROOT_FOLDER_ID = 1;
+
+const MAX_FOLDER_SIZE = 100000;
+const REQUIRED_DISK_SPACE = 30000000;
+const TOTAL_DISK_SPACE = 70000000;
 
 const getFilesystem = (input: string[]): Node[] => {
   let currentNodeId = 1;
