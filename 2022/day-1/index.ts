@@ -1,13 +1,14 @@
 import { getInput } from "../../utils/index.js";
 
 // counting total calories for single elf and sorting output
-const getElvesCalories = (elves: string[][]): number[] =>
+const getElvesCalories = (elves: number[][]): number[] =>
   elves.map((elf) =>
-    elf.map(s => +s).reduce((a, b) => a + b, 0)
+    elf.reduce((a, b) => a + b, 0)
   ).sort((a, b) => b - a);
 
 // crunching input
-const elves = getInput(2022, 1).split("\n\n").map(elf => elf.split('\n'));
+const elves = getInput(2022, 1).split('\n\n').map(elf => elf.split('\n').map(v => Number(v)));
+
 // get "richest" elf calories count
 export const firstPart = (): number => getElvesCalories(elves).shift();
 // get top 3 "richest" elves in calories

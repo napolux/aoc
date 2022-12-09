@@ -37,7 +37,7 @@ const findBadgesCount = (groups: string[][]): number => {
     badges.push(ITEMS_MAP.indexOf(badge) + 1)
   });
 
-  return badges.reduce((a: number, b: number) => a + b, 0);
+  return badges.reduce((a, b) => a + b, 0);
 }
 
 // crunching input
