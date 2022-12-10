@@ -20,6 +20,7 @@ const getRegisterValue = (input: number[]): number => {
 
 const canBeDrawn = (registerValue: number, index: number, row: number): boolean => {
   const adjustedValue = registerValue + (40 * row);
+  // the registerValue is in the middle, so any value before and after is also ok
   return (index >= adjustedValue - 1 && index <= adjustedValue + 1);
 }
 
@@ -28,6 +29,7 @@ const getScreenValue = (input: number[]) => {
   let row = 0;
   input.forEach((value, index) => {
     process.stdout.write((canBeDrawn(registerValue, index, row)) ? '#' : '.');
+    // adding a new line at column 40
     if (index > 0 && (index + 1) % 40 === 0) {
       process.stdout.write('\n');
       row++;
@@ -41,6 +43,7 @@ const getScreenValue = (input: number[]) => {
 const input = getInput(2022, 10)
   // one instruction to two
   .replaceAll(ADDX, `${NOOP}\n${ADDX}`)
+  // a noop is just addx 0
   .replaceAll(NOOP, `${ADDX} 0`)
   .split('\n').map(instruction => parseInt(instruction.split(' ')[1]));
 
