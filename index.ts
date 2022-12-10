@@ -20,9 +20,9 @@ days(`🎄 Advent of Code ${year}, day ${day} 🎁`)
 console.time(timer('Execution time'));
 
 title('First part solution...')
-solution(firstPart());
+solution(firstPart() || '');
 title('Second part solution...')
-solution(secondPart());
+solution(secondPart() || '');
 console.timeEnd(timer('Execution time'));
 
 export { };
