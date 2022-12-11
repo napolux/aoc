@@ -51,13 +51,13 @@ const runMonkeyBusiness = (monkeys: Monkey[], rounds = FIRST_PART_ROUNDS) => {
     // run all the inspections for each monkey
     for (let j = 0; j < monkeys.length; j++) {
       monkeys[j].items.forEach(item => {
+        // building instruction
         const operation = monkeys[j].operation.replaceAll('old', item.toString());
-        let newItemValue;
-        if (rounds === FIRST_PART_ROUNDS) {
-          newItemValue = Math.floor(Number(eval(operation)) / 3);
-        } else {
-          newItemValue = Number(eval(operation)) % multiModule;
-        }
+        // item value should be reduced somehow
+        const newItemValue = (rounds === FIRST_PART_ROUNDS)
+          ? Math.floor(Number(eval(operation)) / 3)
+          : Number(eval(operation)) % multiModule;
+
         if (newItemValue % monkeys[j].test === 0) {
           monkeys[monkeys[j].testTrue].items.push(newItemValue);
         } else {
