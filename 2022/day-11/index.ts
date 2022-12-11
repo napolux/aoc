@@ -1,5 +1,8 @@
 import { getInput } from '../../utils/index.js';
 
+const FIRST_PART_ROUNDS = 20;
+const SECOND_PART_ROUNDS = 10000;
+
 interface Monkey {
   items: number[];
   operation: string;
@@ -42,13 +45,19 @@ const getMonkeys = (input: string): Monkey[] => {
   });
 }
 
-const runMonkeyBusiness = (monkeys: Monkey[]) => {
-  for (let i = 0; i < 20; i++) {
+const runMonkeyBusiness = (monkeys: Monkey[], rounds = FIRST_PART_ROUNDS) => {
+  const multiModule = monkeys.map(m => m.test).reduce((a, b) => a * b, 1);
+  for (let i = 0; i < rounds; i++) {
     // run all the inspections for each monkey
     for (let j = 0; j < monkeys.length; j++) {
       monkeys[j].items.forEach(item => {
         const operation = monkeys[j].operation.replaceAll('old', item.toString());
-        const newItemValue = Math.floor(Number(eval(operation)) / 3);
+        let newItemValue;
+        if (rounds === FIRST_PART_ROUNDS) {
+          newItemValue = Math.floor(Number(eval(operation)) / 3);
+        } else {
+          newItemValue = Number(eval(operation)) % multiModule;
+        }
         if (newItemValue % monkeys[j].test === 0) {
           monkeys[monkeys[j].testTrue].items.push(newItemValue);
         } else {
@@ -64,7 +73,7 @@ const runMonkeyBusiness = (monkeys: Monkey[]) => {
 
 export const firstPart = () => {
   const monkeys = getMonkeys(getInput(2022, 11));
-  const activities = runMonkeyBusiness(monkeys)
+  const activities = runMonkeyBusiness(monkeys, FIRST_PART_ROUNDS)
     .map(m => m.activity).sort((a, b) => a - b);
   return activities
     .slice(-2)
@@ -72,4 +81,9 @@ export const firstPart = () => {
 };
 export const secondPart = () => {
   const monkeys = getMonkeys(getInput(2022, 11));
+  const activities = runMonkeyBusiness(monkeys, SECOND_PART_ROUNDS)
+    .map(m => m.activity).sort((a, b) => a - b);
+  return activities
+    .slice(-2)
+    .reduce((a, b) => a * b, 1);
 };
