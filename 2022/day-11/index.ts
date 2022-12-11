@@ -73,17 +73,13 @@ const runMonkeyBusiness = (monkeys: Monkey[], rounds = FIRST_PART_ROUNDS) => {
 
 export const firstPart = () => {
   const monkeys = getMonkeys(getInput(2022, 11));
-  const activities = runMonkeyBusiness(monkeys, FIRST_PART_ROUNDS)
-    .map(m => m.activity).sort((a, b) => a - b);
-  return activities
-    .slice(-2)
+  return runMonkeyBusiness(monkeys, FIRST_PART_ROUNDS)
+    .map(m => m.activity).sort((a, b) => a - b).slice(-2)
     .reduce((a, b) => a * b, 1);
 };
 export const secondPart = () => {
   const monkeys = getMonkeys(getInput(2022, 11));
-  const activities = runMonkeyBusiness(monkeys, SECOND_PART_ROUNDS)
-    .map(m => m.activity).sort((a, b) => a - b);
-  return activities
-    .slice(-2)
+  return runMonkeyBusiness(monkeys, SECOND_PART_ROUNDS)
+    .map(m => m.activity).sort((a, b) => a - b).slice(-2)
     .reduce((a, b) => a * b, 1);
 };
