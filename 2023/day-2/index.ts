@@ -12,6 +12,21 @@ interface Game {
   isValidGame: boolean;
 }
 
+const getGamesPower = (input: Game[]): number => {
+  return input.map((i) => {
+    let rMax = 0;
+    let gMax = 0;
+    let bMax = 0;
+    i.gameData.forEach((d) => {
+      rMax = Math.max(rMax, d.red ?? 0);
+      gMax = Math.max(gMax, d.green ?? 0);
+      bMax = Math.max(bMax, d.blue ?? 0);
+    })
+    return rMax * gMax * bMax;
+  }).reduce((a, b) => a + b, 0);
+}
+
+
 const getPossibleGamesSum = (input: Game[], red: number, green: number, blue: number): number => {
   return input.map((i) => {
     return {
@@ -53,4 +68,4 @@ const crunchInput = (): Game[] => {
 const input = crunchInput();
 
 export const firstPart = (): number => getPossibleGamesSum(input, 12, 13, 14);
-export const secondPart = (): number => 0;
+export const secondPart = (): number => getGamesPower(input);
