@@ -26,7 +26,6 @@ const getGamesPower = (input: Game[]): number => {
   }).reduce((a, b) => a + b, 0);
 }
 
-
 const getPossibleGamesSum = (input: Game[], red: number, green: number, blue: number): number => {
   return input.map((i) => {
     return {
