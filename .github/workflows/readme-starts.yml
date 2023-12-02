@@ -1,19 +1,19 @@
 name: Update Advent Of Code stars ⭐
 on:
   schedule:
-    - cron: "30 */4 * * *" # Every 4 hours
+    - cron: "0 */12 * * *" # Every 12 hours
   workflow_dispatch:
 
 jobs:
   update-readme:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: k2bd/advent-readme-stars@v1
         with:
           userId: 2383815
-          leaderboardId: 2708
+          leaderboardId: 2383815
           sessionCookie: ${{ secrets.AOC_SESSION }}
-      - uses: stefanzweifel/git-auto-commit-action@v4
+      - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: Update README stars
