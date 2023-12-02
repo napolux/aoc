@@ -45,8 +45,10 @@ const crunchInput = (): Game[] => {
   // example game line
   // Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green
   return lines.map((line) => {
+    // first split: game number and game data
     const [num, data] = line.split(':');
-    const gameNum = Number(num.match(/\d+/)[0]);
+    const gameNum = +num.match(/\d+/)[0];
+    // splitting game data and sets
     const gameData = data.trim().split(';').map(g => g.trim()).map((game) => {
       const sets = game.split(', ');
       const obj = {};
