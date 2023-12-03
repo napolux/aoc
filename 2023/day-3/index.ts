@@ -29,8 +29,6 @@ const getRatio = (partNumbers: Array<Part>, partSymbols: Array<Part>): number =>
     return acc + ((numbers.length === 2) ? numbers[0] * numbers[1] : 0);
   }, 0);
 
-// crunching input: 
-// getting objects for symbols and numbers
 const crunchInput = () => {
   const partNumbers: Array<Part> = [];
   const partSymbols: Array<Part> = [];
