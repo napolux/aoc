@@ -31,7 +31,5 @@ const secondInput = firstInput.map(input => {
   return `${isNaN(+first) ? NUMBERS_MAP[first] : first}${isNaN(+last) ? NUMBERS_MAP[last] : last}`;
 });
 
-// get coordinates
 export const firstPart = (): number => getCoordinates(firstInput);
-// get numbers from letters, too
 export const secondPart = (): number => getCoordinates(secondInput);
