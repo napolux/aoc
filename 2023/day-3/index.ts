@@ -10,22 +10,21 @@ interface Part {
 const partNumbers: Array<Part> = [];
 const partSymbols: Array<Part> = [];
 
-const getSum = (): number => {
-  let sum = 0;
-  partNumbers.forEach((num) => {
+const isAdiacent = (a: Part, b: Part): boolean => {
+
+}
+
+const getSum = (): number =>
+  partNumbers.reduce((acc, num) => {
     const isSymbolBefore = !!find(partSymbols, { x: num.x - 1, line: num.line })
     const isSymbolAfter = !!find(partSymbols, { x: num.x + num.value.length, line: num.line })
     const isSymbolAbove = !!find(partSymbols, (sym: Part) => (sym.line === num.line - 1) && ((sym.x >= num.x - 1) && (sym.x <= (num.x + num.value.length))));
     const isSymbolBelow = !!find(partSymbols, (sym: Part) => (sym.line === num.line + 1) && ((sym.x >= num.x - 1) && (sym.x <= (num.x + num.value.length))));
-    sum += (isSymbolAbove || isSymbolBelow || isSymbolBefore || isSymbolAfter) ? +num.value : 0;
-  });
-  return sum;
-}
+    return acc + ((isSymbolAbove || isSymbolBelow || isSymbolBefore || isSymbolAfter) ? +num.value : 0);
+  }, 0);
 
-const getRatio = (): number => {
-  let ratio = 0;
-
-  partSymbols.filter(v => v.value === '*').forEach((sym) => {
+const getRatio = (): number =>
+  partSymbols.filter(v => v.value === '*').reduce((acc, sym) => {
     const numBefore = filter(partNumbers, (num: Part) => (num.line === sym.line) && (num.x + num.value.length === sym.x))
     const numAfter = filter(partNumbers, (num: Part) => (num.line === sym.line) && (num.x === sym.x + 1))
     const numsAbove = filter(partNumbers, (num: Part) => (num.line === sym.line - 1) && (sym.x >= num.x - 1) && (sym.x <= num.x + num.value.length));
@@ -37,11 +36,8 @@ const getRatio = (): number => {
       ...numsAbove.map(n => +n.value),
       ...numsBelow.map(n => +n.value),
     ];
-
-    ratio += (numbers.length === 2) ? numbers[0] * numbers[1] : 0;
-  });
-  return ratio;
-}
+    return acc + ((numbers.length === 2) ? numbers[0] * numbers[1] : 0);
+  }, 0);
 
 // crunching input: 
 // getting objects for symbols and numbers
