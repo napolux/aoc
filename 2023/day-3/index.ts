@@ -7,10 +7,7 @@ interface Part {
   line: number;
 }
 
-const partNumbers: Array<Part> = [];
-const partSymbols: Array<Part> = [];
-
-const getSum = (): number =>
+const getSum = (partNumbers: Array<Part>, partSymbols: Array<Part>): number =>
   partNumbers.reduce((acc, num) => {
     const isSymbolBefore = !!find(partSymbols, { x: num.x - 1, line: num.line })
     const isSymbolAfter = !!find(partSymbols, { x: num.x + num.value.length, line: num.line })
@@ -19,7 +16,7 @@ const getSum = (): number =>
     return acc + ((isSymbolAbove || isSymbolBelow || isSymbolBefore || isSymbolAfter) ? +num.value : 0);
   }, 0);
 
-const getRatio = (): number =>
+const getRatio = (partNumbers: Array<Part>, partSymbols: Array<Part>): number =>
   partSymbols.filter(v => v.value === '*').reduce((acc, sym) => {
     const numBefore = partNumbers.filter((num: Part) => (num.line === sym.line) && (num.x + num.value.length === sym.x))
     const numAfter = partNumbers.filter((num: Part) => (num.line === sym.line) && (num.x === sym.x + 1))
@@ -35,7 +32,10 @@ const getRatio = (): number =>
 // crunching input: 
 // getting objects for symbols and numbers
 const crunchInput = () => {
+  const partNumbers: Array<Part> = [];
+  const partSymbols: Array<Part> = [];
   const lines = getInput(2023, 3).split('\n');
+
   lines.forEach((line: string, numLine: number) => {
     line.replace(/\d+/g, (value, index) => {
       partNumbers.push({ value, x: index, line: numLine });
@@ -48,9 +48,10 @@ const crunchInput = () => {
       }
     });
   });
+  return { partNumbers, partSymbols }
 };
 
-crunchInput();
+const { partNumbers, partSymbols } = crunchInput();
 
-export const firstPart = (): number => getSum();
-export const secondPart = (): number => getRatio();
+export const firstPart = (): number => getSum(partNumbers, partSymbols);
+export const secondPart = (): number => getRatio(partNumbers, partSymbols);
