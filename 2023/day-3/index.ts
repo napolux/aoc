@@ -48,24 +48,16 @@ const getRatio = (): number => {
 const crunchInput = () => {
   const lines = getInput(2023, 3).split('\n');
   lines.forEach((line: string, numLine: number) => {
+    line.replace(/\d+/g, (value, index) => {
+      partNumbers.push({ value, x: index, line: numLine });
+      return '';
+    });
 
-    for (const match of line.matchAll(/\d+/g)) {
-      partNumbers.push({
-        value: match[0],
-        x: match.index,
-        line: numLine,
-      });
-    }
-
-    for (let i = 0; i < line.length; i++) {
-      if (line[i] !== '.' && isNaN(+line[i])) {
-        partSymbols.push({
-          value: line[i],
-          x: i,
-          line: numLine,
-        });
+    line.split('').forEach((char, index) => {
+      if (char !== '.' && isNaN(+char)) {
+        partSymbols.push({ value: char, x: index, line: numLine });
       }
-    }
+    });
   });
 };
 
