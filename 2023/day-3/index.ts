@@ -1,4 +1,4 @@
-import { filter, find } from "lodash-es";
+import { find } from "lodash-es";
 import { getInput } from "../../utils/index.js";
 
 interface Part {
@@ -14,17 +14,17 @@ const getSum = (): number =>
   partNumbers.reduce((acc, num) => {
     const isSymbolBefore = !!find(partSymbols, { x: num.x - 1, line: num.line })
     const isSymbolAfter = !!find(partSymbols, { x: num.x + num.value.length, line: num.line })
-    const isSymbolAbove = !!find(partSymbols, (sym: Part) => (sym.line === num.line - 1) && ((sym.x >= num.x - 1) && (sym.x <= (num.x + num.value.length))));
-    const isSymbolBelow = !!find(partSymbols, (sym: Part) => (sym.line === num.line + 1) && ((sym.x >= num.x - 1) && (sym.x <= (num.x + num.value.length))));
+    const isSymbolAbove = partSymbols.some((sym: Part) => (sym.line === num.line - 1) && ((sym.x >= num.x - 1) && (sym.x <= (num.x + num.value.length))));
+    const isSymbolBelow = partSymbols.some((sym: Part) => (sym.line === num.line + 1) && ((sym.x >= num.x - 1) && (sym.x <= (num.x + num.value.length))));
     return acc + ((isSymbolAbove || isSymbolBelow || isSymbolBefore || isSymbolAfter) ? +num.value : 0);
   }, 0);
 
 const getRatio = (): number =>
   partSymbols.filter(v => v.value === '*').reduce((acc, sym) => {
-    const numBefore = filter(partNumbers, (num: Part) => (num.line === sym.line) && (num.x + num.value.length === sym.x))
-    const numAfter = filter(partNumbers, (num: Part) => (num.line === sym.line) && (num.x === sym.x + 1))
-    const numsAbove = filter(partNumbers, (num: Part) => (num.line === sym.line - 1) && (sym.x >= num.x - 1) && (sym.x <= num.x + num.value.length));
-    const numsBelow = filter(partNumbers, (num: Part) => (num.line === sym.line + 1) && (sym.x >= num.x - 1) && (sym.x <= num.x + num.value.length));
+    const numBefore = partNumbers.filter((num: Part) => (num.line === sym.line) && (num.x + num.value.length === sym.x))
+    const numAfter = partNumbers.filter((num: Part) => (num.line === sym.line) && (num.x === sym.x + 1))
+    const numsAbove = partNumbers.filter((num: Part) => (num.line === sym.line - 1) && (sym.x >= num.x - 1) && (sym.x <= num.x + num.value.length));
+    const numsBelow = partNumbers.filter((num: Part) => (num.line === sym.line + 1) && (sym.x >= num.x - 1) && (sym.x <= num.x + num.value.length));
 
     const numbers: number[] = [
       ...numBefore.map(n => +n.value),
