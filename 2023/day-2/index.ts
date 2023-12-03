@@ -39,30 +39,28 @@ const getPossibleGamesSum = (input: Game[], red: number, green: number, blue: nu
 
 // crunching input: 
 // getting an object with game number and games
-const crunchInput = (): Game[] => {
-  const lines = getInput(2023, 2).split('\n');
-  // example game line
-  // Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green
-  return lines.map((line) => {
-    // first split: game number and game data
-    const [num, data] = line.split(':');
-    const gameNum = +num.match(/\d+/)[0];
-    // splitting game data and sets
-    const gameData = data.trim().split(';').map(g => g.trim()).map((game) => {
-      const sets = game.split(', ');
-      const obj = {};
-      sets.forEach((set) => {
-        const [count, color] = set.split(' ');
-        obj[color] = Number(count);
-      })
-      return obj;
+const crunchInput = (): Game[] =>
+  getInput(2023, 2)
+    .split('\n')
+    .map((line) => {
+      const [num, data] = line.split(':');
+      const gameNum = +num.match(/\d+/)[0];
+      const gameData = data
+        .trim()
+        .split(';')
+        .map((game) =>
+          game
+            .trim()
+            .split(', ')
+            .reduce((obj, set) => {
+              const [count, color] = set.split(' ');
+              obj[color] = Number(count);
+              return obj;
+            }, {})
+        );
+      return { gameNum, gameData };
     });
-    return {
-      gameNum,
-      gameData,
-    }
-  });
-};
+
 
 const input = crunchInput();
 
