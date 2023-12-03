@@ -27,10 +27,7 @@ const getRatio = (): number =>
     const numsBelow = partNumbers.filter((num: Part) => (num.line === sym.line + 1) && (sym.x >= num.x - 1) && (sym.x <= num.x + num.value.length));
 
     const numbers: number[] = [
-      ...numBefore.map(n => +n.value),
-      ...numAfter.map(n => +n.value),
-      ...numsAbove.map(n => +n.value),
-      ...numsBelow.map(n => +n.value),
+      ...[numBefore, numAfter, numsAbove, numsBelow].flatMap((nums) => nums.map((n) => +n.value)),
     ];
     return acc + ((numbers.length === 2) ? numbers[0] * numbers[1] : 0);
   }, 0);
