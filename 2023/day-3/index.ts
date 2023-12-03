@@ -11,7 +11,10 @@ const partNumbers: Array<Part> = [];
 const partSymbols: Array<Part> = [];
 
 const isAdiacent = (a: Part, b: Part): boolean => {
-
+  return ((a.line === b.line) && (a.x + b.value.length === b.x)) ||
+    ((a.line === b.line) && (a.x === b.x + 1)) ||
+    ((a.line === b.line - 1) && (a.x >= b.x - 1) && (a.x <= b.x + b.value.length)) ||
+    ((a.line === b.line + 1) && (a.x >= b.x - 1) && (a.x <= b.x + b.value.length));
 }
 
 const getSum = (): number =>
@@ -25,17 +28,7 @@ const getSum = (): number =>
 
 const getRatio = (): number =>
   partSymbols.filter(v => v.value === '*').reduce((acc, sym) => {
-    const numBefore = filter(partNumbers, (num: Part) => (num.line === sym.line) && (num.x + num.value.length === sym.x))
-    const numAfter = filter(partNumbers, (num: Part) => (num.line === sym.line) && (num.x === sym.x + 1))
-    const numsAbove = filter(partNumbers, (num: Part) => (num.line === sym.line - 1) && (sym.x >= num.x - 1) && (sym.x <= num.x + num.value.length));
-    const numsBelow = filter(partNumbers, (num: Part) => (num.line === sym.line + 1) && (sym.x >= num.x - 1) && (sym.x <= num.x + num.value.length));
-
-    const numbers: number[] = [
-      ...numBefore.map(n => +n.value),
-      ...numAfter.map(n => +n.value),
-      ...numsAbove.map(n => +n.value),
-      ...numsBelow.map(n => +n.value),
-    ];
+    const numbers = filter(partNumbers, (num: Part) => isAdiacent(num, sym)).map(n => +n.value);
     return acc + ((numbers.length === 2) ? numbers[0] * numbers[1] : 0);
   }, 0);
 
