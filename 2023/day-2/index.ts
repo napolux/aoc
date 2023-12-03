@@ -9,34 +9,34 @@ interface GameData {
 interface Game {
   gameNum: number;
   gameData: GameData[];
-  isValidGame: boolean;
+  isValidGame?: boolean;
 }
 
-const getGamesPower = (input: Game[]): number => {
-  return input.map((i) => {
-    let rMax = 0;
-    let gMax = 0;
-    let bMax = 0;
-    i.gameData.forEach((d) => {
-      rMax = Math.max(rMax, d.red ?? 0);
-      gMax = Math.max(gMax, d.green ?? 0);
-      bMax = Math.max(bMax, d.blue ?? 0);
-    })
-    return rMax * gMax * bMax;
-  }).reduce((a, b) => a + b, 0);
-}
+const getGamesPower = (input: Game[]): number =>
+  input
+    .map((game) =>
+      game.gameData.reduce(
+        (max, data) => ({
+          red: Math.max(max.red, data.red ?? 0),
+          green: Math.max(max.green, data.green ?? 0),
+          blue: Math.max(max.blue, data.blue ?? 0),
+        }),
+        { red: 0, green: 0, blue: 0 }
+      )
+    )
+    .reduce((total, max) => total + max.red * max.green * max.blue, 0);
 
-const getPossibleGamesSum = (input: Game[], red: number, green: number, blue: number): number => {
-  return input.map((i) => {
-    return {
-      gameNum: i.gameNum,
-      isValidGame: i.gameData.map((d) => {
-        const [r, g, b] = [d.red ?? 0, d.green ?? 0, d.blue ?? 0];
-        return (r <= red && g <= green && b <= blue);
-      }).every(Boolean),
-    }
-  }).filter((game) => game.isValidGame).map((game) => game.gameNum).reduce((a, b) => a + b, 0);
-}
+
+const getPossibleGamesSum = (input: Game[], red: number, green: number, blue: number): number =>
+  input
+    .filter((game) =>
+      game.gameData.every(
+        (data) => (data.red ?? 0) <= red && (data.green ?? 0) <= green && (data.blue ?? 0) <= blue
+      )
+    )
+    .map((game) => game.gameNum)
+    .reduce((total, num) => total + num, 0);
+
 
 // crunching input: 
 // getting an object with game number and games
@@ -61,7 +61,6 @@ const crunchInput = (): Game[] => {
     return {
       gameNum,
       gameData,
-      isValidGame: false,
     }
   });
 };
