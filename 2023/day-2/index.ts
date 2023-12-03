@@ -37,7 +37,6 @@ const getPossibleGamesSum = (input: Game[], red: number, green: number, blue: nu
     .map((game) => game.gameNum)
     .reduce((total, num) => total + num, 0);
 
-
 // crunching input: 
 // getting an object with game number and games
 const crunchInput = (): Game[] => {
