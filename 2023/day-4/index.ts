@@ -1,17 +1,21 @@
 import { getInput } from "../../utils/index.js";
 
-interface Game {
+interface Card {
   gameNum: number;
   winning: Array<number>;
   yours: Array<number>;
 }
 
-const getWinnings = (games: Array<Game>): number =>
-  games
-    .map((game) => game.winning.filter((num) => game.yours.includes(num)))
+const getWinnings = (cards: Array<Card>): number =>
+  cards
+    .map((card) => card.winning.filter((num) => card.yours.includes(num)))
     .reduce((acc, winnings) => acc + ((winnings.length > 0) ? Math.pow(2, winnings.length - 1) : 0), 0);
 
-const crunchInput = (): Array<Game> => {
+// const getCards = (games: Array<Card>): number => {
+//   const stack = 
+// }
+
+const crunchInput = (): Array<Card> => {
   const lines = getInput(2023, 4).split('\n');
   return lines.map((line) => {
     const [num, card] = line.split(': ');
@@ -28,7 +32,7 @@ const crunchInput = (): Array<Game> => {
 }
 
 // crunching input
-const games: Array<Game> = crunchInput();
+const cards: Array<Card> = crunchInput();
 
-export const firstPart = (): number => getWinnings(games);
+export const firstPart = (): number => getWinnings(cards);
 export const secondPart = (): number => 0;// getCoordinates(secondInput);
