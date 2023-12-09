@@ -14,26 +14,26 @@ const getStartingKeys = (map: Map<string, Data>): string[] =>
   Array.from(map.keys()).filter((k) => k.endsWith('A'));
 
 const countSteps = (items: string[], dir: string, map: Map<string, Data>): number => {
-  const multipleSteps = [];
+  const steps = [];
   const startingKeys = items;
 
   startingKeys.forEach((key) => {
-    let steps = 0;
+    let count = 0;
     let found = false;
     let current = key;
     while (!found) {
-      const next: string = map.get(current)[dir[steps % dir.length]];
+      const next: string = map.get(current)[dir[count % dir.length]];
       if (next.endsWith('Z')) {
         found = true;
       } else {
         current = next;
-        steps++;
+        count++;
       }
     }
-    multipleSteps.push(steps + 1);
+    steps.push(count + 1);
   });
 
-  return lcmAll(multipleSteps);
+  return lcmAll(steps);
 }
 
 const crunchInput = (): { dir: string, map: Map<string, Data> } => {
