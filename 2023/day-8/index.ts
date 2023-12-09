@@ -5,40 +5,35 @@ interface Data {
   R: string;
 }
 
-const countSteps = (dir: string, map: Map<string, Data>): number => {
-  let steps = 0;
-  let found = false;
-  let current = 'AAA';
-  while (!found) {
-    const next: string = map.get(current)[dir[steps % dir.length]];
-    if (next === 'ZZZ') {
-      found = true;
-    } else {
-      current = next;
-      steps++;
-    }
-  }
-  return steps + 1;
-}
+/** @see https://www.geeksforgeeks.org/lcm-of-given-array-elements/ */
+const gcd = (a: number, b: number): number => b == 0 ? a : gcd(b, a % b)
+const lcm = (a: number, b: number) => a / gcd(a, b) * b
+const lcmAll = (numbers: number[]) => numbers.reduce(lcm, 1)
 
 const getStartingKeys = (map: Map<string, Data>): string[] =>
-  Object.keys(map).filter(k => k[2] === 'A');
+  Array.from(map.keys()).filter((k) => k.endsWith('A'));
 
-const countSimultaneousSteps = (dir: string, map: Map<string, Data>): number => {
-  let steps = 0;
-  let found = false;
-  let currentKeys = getStartingKeys(map);
-  console.log(currentKeys); process.exit();
-  while (!found) {
-    const next = map.get(current)[dir[steps % dir.length]];
-    if (next === 'ZZZ') {
-      found = true;
-    } else {
-      current = next;
-      steps++;
+const countSteps = (items: string[], dir: string, map: Map<string, Data>): number => {
+  const multipleSteps = [];
+  const startingKeys = items;
+
+  startingKeys.forEach((key) => {
+    let steps = 0;
+    let found = false;
+    let current = key;
+    while (!found) {
+      const next: string = map.get(current)[dir[steps % dir.length]];
+      if (next.endsWith('Z')) {
+        found = true;
+      } else {
+        current = next;
+        steps++;
+      }
     }
-  }
-  return steps + 1;
+    multipleSteps.push(steps + 1);
+  });
+
+  return lcmAll(multipleSteps);
 }
 
 const crunchInput = (): { dir: string, map: Map<string, Data> } => {
@@ -46,8 +41,8 @@ const crunchInput = (): { dir: string, map: Map<string, Data> } => {
   const input = getInput(2023, 8).split('\n');
   input.forEach((v, index) => {
     if (index >= 2) {
-      const matches = v.match(/[A-Z]{3}/g)
-      map.set(matches[0], { L: matches[1], R: matches[2] })
+      const matches = v.match(/[0-9-A-Z]{3}/g);
+      map.set(matches[0], { L: matches[1], R: matches[2] });
     }
   });
 
@@ -59,5 +54,5 @@ const crunchInput = (): { dir: string, map: Map<string, Data> } => {
 
 const { dir, map } = crunchInput();
 
-export const firstPart = (): number => countSteps(dir, map);
-export const secondPart = (): number => countSimultaneousSteps(dir, map);
+export const firstPart = (): number => countSteps(['AAA'], dir, map);
+export const secondPart = (): number => countSteps(getStartingKeys(map), dir, map);
