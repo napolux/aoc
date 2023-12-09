@@ -10,6 +10,26 @@ const countSteps = (dir: string, map: Map<string, Data>): number => {
   let found = false;
   let current = 'AAA';
   while (!found) {
+    const next: string = map.get(current)[dir[steps % dir.length]];
+    if (next === 'ZZZ') {
+      found = true;
+    } else {
+      current = next;
+      steps++;
+    }
+  }
+  return steps + 1;
+}
+
+const getStartingKeys = (map: Map<string, Data>): string[] =>
+  Object.keys(map).filter(k => k[2] === 'A');
+
+const countSimultaneousSteps = (dir: string, map: Map<string, Data>): number => {
+  let steps = 0;
+  let found = false;
+  let currentKeys = getStartingKeys(map);
+  console.log(currentKeys); process.exit();
+  while (!found) {
     const next = map.get(current)[dir[steps % dir.length]];
     if (next === 'ZZZ') {
       found = true;
@@ -40,4 +60,4 @@ const crunchInput = (): { dir: string, map: Map<string, Data> } => {
 const { dir, map } = crunchInput();
 
 export const firstPart = (): number => countSteps(dir, map);
-export const secondPart = (): number => 0;
+export const secondPart = (): number => countSimultaneousSteps(dir, map);
