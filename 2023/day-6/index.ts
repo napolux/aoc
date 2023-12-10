@@ -5,11 +5,6 @@ interface Race {
   distance: number;
 }
 
-interface Race {
-  time: number;
-  distance: number;
-}
-
 const winningRaces = (races: Race[]): number =>
   races.reduce((totalBeats, r) => {
     let beat = 0;
