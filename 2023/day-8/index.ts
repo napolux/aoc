@@ -13,9 +13,8 @@ const lcmAll = (numbers: number[]) => numbers.reduce(lcm, 1)
 const getStartingKeys = (map: Map<string, Data>): string[] =>
   Array.from(map.keys()).filter((k) => k.endsWith('A'));
 
-const countSteps = (items: string[], dir: string, map: Map<string, Data>): number => {
+const countSteps = (startingKeys: string[], dir: string, map: Map<string, Data>): number => {
   const steps = [];
-  const startingKeys = items;
 
   startingKeys.forEach((key) => {
     let count = 0;
